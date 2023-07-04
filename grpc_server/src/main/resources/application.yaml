@@ -1,0 +1,8 @@
+grpc:
+  server:
+    address: 127.0.0.1
+    port: 9999
+#    security:
+#      enabled: true
+#      certificate-chain: file:server.crt
+#      private-key: file:server.key

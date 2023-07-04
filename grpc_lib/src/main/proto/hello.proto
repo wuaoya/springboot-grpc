@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package com.way.proto;
+//是否生成外部类模式的实体类
+option java_multiple_files = true;
+option java_package = "com.way.proto.test";
+option java_outer_classname = "HelloProto";
+
+service HelloService {
+    rpc HelloMethod (StringReq) returns (StringResp) {}
+}
+
+message StringReq{
+    string name = 1;
+}
+
+message StringResp{
+    string result = 1;
+}
