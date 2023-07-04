@@ -4,6 +4,7 @@ grpc:
       address: 'static://127.0.0.1:9999'
 #      明文传输，如果不设置默认是TLS传输，需要配置证书（如果该服务在反向代理TLS之后，则此处就不需要TLS加密了）
       negotiation-type: plaintext
+#      目前测试是一个springboot集成的grpc服务端只能设置一个服务端口，实际客户端可以连接多个ip端口
     switchmlServiceImpl:
-      address: 'static://127.0.0.1:8888'
-      negotiation-type: plaintext_upgrade
+      address: 'static://127.0.0.1:9999'
+      negotiation-type: plaintext

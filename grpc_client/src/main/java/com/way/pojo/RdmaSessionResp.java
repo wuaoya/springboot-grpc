@@ -6,12 +6,25 @@ import java.util.List;
 
 @Component
 public class RdmaSessionResp {
+    @Override
+    public String toString() {
+        return "RdmaSessionResp{" +
+                "sessionId=" + sessionId +
+                ", mac=" + mac +
+                ", ipv4=" + ipv4 +
+                ", rkey=" + rkey +
+                ", qpns=" + qpns +
+                ", psns=" + psns +
+                '}';
+    }
+
     private long sessionId;
     private long mac;
     private int ipv4;
     private int rkey;
     private List<? extends Object> qpns;
     private List<? extends Object> psns;
+
     public long getSessionId() {
         return sessionId;
     }
