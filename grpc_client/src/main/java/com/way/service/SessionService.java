@@ -19,7 +19,7 @@ public class SessionService {
      * @param rdmaSessionReq
      * @return
      */
-    public RdmaSessionResp RdmaSession(RdmaSessionReq rdmaSessionReq){
+    /*public RdmaSessionResp RdmaSession(RdmaSessionReq rdmaSessionReq){
         RdmaSessionRequest rdmaSessionRequest = RdmaSessionRequest.newBuilder()
                 .setSessionId(rdmaSessionReq.getSessionId())
                 .setRank(rdmaSessionReq.getRank())
@@ -41,6 +41,29 @@ public class SessionService {
         rdmaSessionResp.setRkey(rdmaSessionResponse.getRkey());
         rdmaSessionResp.setQpns(rdmaSessionResponse.getQpnsList());
         rdmaSessionResp.setPsns(rdmaSessionResponse.getPsnsList());
+        return rdmaSessionResp;
+    }*/
+
+    public RdmaSessionResp RdmaSession(RdmaSessionReq rdmaSessionReq){
+        RdmaSessionRequest rdmaSessionRequest = RdmaSessionRequest.newBuilder()
+                .setSessionId(rdmaSessionReq.getSessionId())
+                .setRank(rdmaSessionReq.getRank())
+                .setNumWorkers(rdmaSessionReq.getNumWrokers())
+                .setMac(rdmaSessionReq.getMac())
+                .setIpv4(rdmaSessionReq.getIpv4())
+                .setRkey(rdmaSessionReq.getRkey())
+                .setPacketSize(PacketSize.MTU_1024)
+                .setMessageSize(rdmaSessionReq.getMessageSize())
+//                该方法对复杂对象处理比较麻烦
+//                .addAllQpns()
+//                .addAllQpns()
+                .build();
+        RdmaSessionResponse rdmaSessionResponse = sessionBlockingStub.rdmaSession(rdmaSessionRequest);
+        rdmaSessionResponse.newBuilderForType().addPsns(2);
+        RdmaSessionResponse build = rdmaSessionResponse.newBuilderForType().addPsns(21).build();
+        RdmaSessionResp rdmaSessionResp = new RdmaSessionResp();
+        rdmaSessionResp = ObjectCopyUtils.copyProperties(build,RdmaSessionResp.class);
+        System.out.println(rdmaSessionResp);
         return rdmaSessionResp;
     }
 
